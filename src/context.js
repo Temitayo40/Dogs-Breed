@@ -2,11 +2,19 @@ import React, { useState, useContext, useEffect } from "react";
 
 const AppContext = React.createContext();
 
+const getLocalStorage = () => {
+  let list = localStorage.getItem("list");
+  if (list) {
+    return (list = JSON.parse(localStorage.getItem("list")));
+  } else {
+    return [];
+  }
+};
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [dogName, setDogName] = useState("");
   const [data, setData] = useState([]);
-  const [dogList, setDogList] = useState([]);
+  const [dogList, setDogList] = useState(getLocalStorage());
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });

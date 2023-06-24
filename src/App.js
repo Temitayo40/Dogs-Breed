@@ -1,12 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import List from "./dogList";
 import Alert from "./Alert";
 import "./App.css";
 import { useGlobalContext } from "./context";
-
-const data = "me";
-const url = "https://dog.ceo/api/breed/${data}/images/random";
-// `https://dog.ceo/api/breeds/${dogName}/images/random`
 
 const App = () => {
   const {
@@ -27,20 +23,6 @@ const App = () => {
     setData,
   } = useGlobalContext();
 
-  const fetchData = async () => {
-    try {
-      // setDogName(e.target.value);
-      const response = await fetch(
-        `https://dog.ceo/api/breed/${dogName.toLowerCase()}/images/random`
-      );
-      const data = await response.json();
-      setData(data);
-      console.log(String(data.message));
-    } catch (error) {
-      return setData(data.message);
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!dogName) {
@@ -59,14 +41,19 @@ const App = () => {
       setIsEditing(false);
       showAlert(true, "success", "value changed");
     } else {
-      fetchData();
-      showAlert(true, "success", "item added to the list");
+      // fetchData();
 
+      showAlert(true, "success", "item added to the list");
       const newItem = { id: new Date().getTime().toString(), title: dogName };
       setDogList([...dogList, newItem]);
       setDogName("");
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(dogList));
+  }, [dogList]);
+
   return (
     <>
       <section className="section-center">
@@ -76,21 +63,14 @@ const App = () => {
               <Alert {...alert} removeAlert={showAlert} list={dogList} />
             </>
           )}
-          {data.status === "success" ? (
-            <div className="image-container">
-              <img src={`${data.message}`} alt="dog" className="image" />
-            </div>
-          ) : (
-            <h3 style={{ color: "red" }}>{data.message}</h3>
-          )}
 
-          <h3>Random Dog Breeds</h3>
+          <h3>To Do List</h3>
 
           <div className="form-control">
             <input
               type="text"
               className="grocery"
-              placeholder="e.g. Rottweiler"
+              placeholder="e.g. Dancing"
               value={dogName}
               onChange={(e) => setDogName(e.target.value)}
             />

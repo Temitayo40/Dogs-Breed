@@ -1,0 +1,32 @@
+// const fetchData = async () => {
+//   try {
+//     // setDogName(e.target.value);
+//     const response = fetch(
+//       `https://dog.ceo/api/breed/${dogName.toLowerCase()}/images/random`
+//     );
+//     const data = await response.json();
+//     if (data.status === "suceess") {
+//       setData(data.message);
+//     } else {
+//       setData(data.status);
+//     }
+//     setData(data);
+//     console.log(String(data.message));
+//   } catch (error) {
+//     return setData(data.message);
+//   }
+// };
+
+{
+  /* {
+            <div className="image-container">
+              {data === "error" ? (
+                <h3>bad</h3>
+              ) : (
+                <img src={`${data}`} alt="dog" className="image" />
+              )}
+            </div>
+
+            // <h3 style={{ color: "red" }}>Dog Breed Not Found</h3>
+          } */
+}
