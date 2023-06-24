@@ -4,6 +4,12 @@ import Alert from "./Alert";
 import "./App.css";
 import { useGlobalContext } from "./context";
 
+// ### Assumption While Coding
+
+// The project can be improved by fetching an API (Application Programming Interface) from the backed using any library of interest(Axios). E.g let's say a dog breed api, we get the value input into the text-field, and search for that type of dog breed and retun back the picture of the Dog.
+
+// giving back an Error message if dog's breed does not exist.
+
 const App = () => {
   const {
     dogList,
